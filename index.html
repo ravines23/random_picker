@@ -8,8 +8,8 @@ function get_random() {
 	var params = location.hash.substr(1).split("/");
 	var index = params[0];
 	var key = params[1];
-	var encrypted_data = whole_data[index];
-	var stringified_data = decrypt("InitVector", key, encrypted_data);
+	var encrypted_data = base64ToBuffer(whole_data[index]);
+	var stringified_data = await decrypt("InitVector", key, encrypted_data);
 	var data = JSON.parse(stringified_data);
 	for (var i = 0; i < data.length; i++) {
 		var random = getRandomByWeight(weights);
