@@ -1,10 +1,11 @@
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script type=text/javascript src="/random_picker/random.js"></script>
 <script type=text/javascript src="/data_packer/data_packer.js"></script>
 <script>
 var whole_data = {"alpha":"QFtXa9VMGvCwmT7ihk9gdCro8Ppt1E2oo3CZil6WmMVlRGH0/whzFg8WZ6CpF9kICM6HEB9BtU5LqmVa2COT8pSZ9EmiJYlcMflgbsQMBNsmYckHsNuE6gH9HqoQGkBDU0LQk5EFrJzDR4fAE+GbDtsN5CQS3EvujwV/p9uLyU/pbc2zVqyzhbpVZVBBQr0X57eZxKRg07tfKg+fELIG1c1NG8cX3GxkTz7RDoK05rcg4Yd6ku59/NNEl4cxaFYatevJJGwQjLyp/SQSuQ0iKP2REzKMU6RNuJ6Nu220QK4TiC44olDc0vaP2DDbIMa43DM4GhqwKzH89qlj9tK+t7jGgJnWWW1J1RstVI3pZBU="};
-function get_random() {
+async function get_random() {
 	var params = location.hash.substr(1).split("/");
 	var index = params[0];
 	var key = params[1];
@@ -12,13 +13,13 @@ function get_random() {
 	var stringified_data = await decrypt("InitVector", key, encrypted_data);
 	var data = JSON.parse(stringified_data);
 	for (var i = 0; i < data.length; i++) {
-		var random = getRandomByWeight(weights);
+		var random = getRandomByWeight(data[i]);
 		document.getElementById("result").innerHTML += random+"<br>";
 	}
 }
 </script>
 </head>
 <body onload="get_random();">
-<div id="result"></div>
+<div id="result" style="text-align:center"></div>
 </body>
 </html>
