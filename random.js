@@ -1,8 +1,3 @@
-var variables1 = { a: 0.5, 
-	b: 0.3, 
-	c: 0.2,
-};
-
 function getRandomByWeight(weights) {
 	var keys = Object.keys(weights);
 	var random = Math.random();
@@ -16,6 +11,3 @@ function getRandomByWeight(weights) {
 	}
 	return keys[keys.length - 1];
 }
-
-console.log(getRandomByWeight(variables1));
-
