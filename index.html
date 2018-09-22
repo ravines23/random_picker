@@ -9,13 +9,21 @@ async function get_random() {
 	var params = location.hash.substr(1).split("/");
 	var index = params[0];
 	var key = params[1];
+	if (params.length < 2) return false;
+	if (!(index in params)) return false;
 	var encrypted_data = base64ToBuffer(whole_data[index]);
 	var stringified_data = await decrypt("InitVector", key, encrypted_data);
-	var data = JSON.parse(stringified_data);
+	var data;
+	try {
+		data = JSON.parse(stringified_data);
+	} catch (e) {
+		return false;
+	}
 	for (var i = 0; i < data.length; i++) {
 		var random = getRandomByWeight(data[i]);
 		document.getElementById("result").innerHTML += random+"<br>";
 	}
+	return true;
 }
 </script>
 </head>
