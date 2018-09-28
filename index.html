@@ -10,7 +10,7 @@ async function get_random() {
 	var index = params[0];
 	var key = params[1];
 	if (params.length < 2) return false;
-	if (!(index in params)) return false;
+	if (params.indexOf(index) == -1) return false;
 	var encrypted_data = base64ToBuffer(whole_data[index]);
 	var stringified_data = await decrypt("InitVector", key, encrypted_data);
 	var data;
